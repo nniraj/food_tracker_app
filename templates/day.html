@@ -36,15 +36,17 @@
         <div>
           <div class="panel panel-primary">
             <div class="panel-heading">
-              <h3 class="panel-title">January 28, 2017</h3>
+              <h3 class="panel-title">{{date}}</h3>
             </div>
 
             <div class="panel-body">
 
-              <form method="POST" action="/">
+              <form method="POST" action="{{ url_for('view', date='20240929')}}">
                 <div class="form-group">
-                  <select class="form-control">
-                    <option>1</option>
+                  <select class="form-control" name="food-select">
+                    {% for res in results%}
+                    <option value={{res.id}}>{{res.names}}</option>
+                    {% endfor %}
                   </select>
                 </div>
 
@@ -66,15 +68,17 @@
 
             <div class="page-header"></div>
 
+            {% for food in log_results%}
             <div class="panel-body">
               <ul class="nav nav-pills" role="tablist">
-                <li class="active"><a>Pizza</a></li>
-                <li><a>Protein: <span class="badge">100</span></a></li>
-                <li><a>Carbohydates: <span class="badge">200</span></a></li>
-                <li><a>Fat: <span class="badge">50</span></a></li>
-                <li><a>Calories: <span class="badge">1650</span></a></li>
+                <li class="active"><a>{{food.names}}</a></li>
+                <li><a>Protein: <span class="badge">{{food.protein}}</span></a></li>
+                <li><a>Carbohydates: <span class="badge">{{food.carbohydrates}}</span></a></li>
+                <li><a>Fat: <span class="badge">{{food.fat}}</span></a></li>
+                <li><a>Calories: <span class="badge">{{food.calories}}</span></a></li>
               </ul>
             </div>
+            {% endfor %}
 
           </div>
         </div>
